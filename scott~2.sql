@@ -1,16 +1,16 @@
---1. »ç¿ø ÀÌ¸§ÀÌ s·Î ³¡³ª´Â »ç¿ø µ¥ÀÌÅÍ¸¦ ¸ğµÎ Ãâ·Â
+--1. ì‚¬ì› ì´ë¦„ì´ së¡œ ëë‚˜ëŠ” ì‚¬ì› ë°ì´í„°ë¥¼ ëª¨ë‘ ì¶œë ¥
 select * 
 from emp 
 where ename like'%S';
 
---2. 30¹ø ºÎ¼­¿¡¼­ ±Ù¹« »ç¿ø Áß 
---Á÷Ã¥ÀÌ SALESMANÀÎ »ç¿øÀÇ ¹øÈ£,ÀÌ¸§,Á÷Ã¥,±Ş¿©,ºÎ¼­¹øÈ£ Ãâ·Â
+--2. 30ë²ˆ ë¶€ì„œì—ì„œ ê·¼ë¬´ ì‚¬ì› ì¤‘ 
+--ì§ì±…ì´ SALESMANì¸ ì‚¬ì›ì˜ ë²ˆí˜¸,ì´ë¦„,ì§ì±…,ê¸‰ì—¬,ë¶€ì„œë²ˆí˜¸ ì¶œë ¥
 select empno, ename, job, sal, deptno 
 from emp 
 where deptno = 30 and job = 'SALEMAN';
 
---3. 20¹ø, 30¹ø ºÎ¼­¿¡¼­ ±Ù¹«ÇÏ°í ÀÖ´À ¤¤»ç¿ø Áß ±Ş¿©°¡ 200ÃÊ°úÀÎ »ç¿øÀÇ
--- ¹øÈ£, ÀÌ¸§, ±Ş¿© ºÎ¼­¹øÈ£ Ãâ·ÂÇÏ¼¼¿ä.
+--3. 20ë²ˆ, 30ë²ˆ ë¶€ì„œì—ì„œ ê·¼ë¬´í•˜ê³  ìˆëŠ ã„´ì‚¬ì› ì¤‘ ê¸‰ì—¬ê°€ 200ì´ˆê³¼ì¸ ì‚¬ì›ì˜
+-- ë²ˆí˜¸, ì´ë¦„, ê¸‰ì—¬ ë¶€ì„œë²ˆí˜¸ ì¶œë ¥í•˜ì„¸ìš”.
 select empno, ename, sal, deptno 
 from emp
 where deptno = 20 and sal>2000
@@ -18,33 +18,77 @@ union
 select empno, ename, sal, deptno 
 from emp
 where deptno = 30 and sal>2000;
---ÂªÀº ¹öÀü. inÀ» ÀÌ¿ëÇØ¼­ 20 ¶Ç´Â 30À» ¸ÂÃçÁÜ
+--ì§§ì€ ë²„ì „. inì„ ì´ìš©í•´ì„œ 20 ë˜ëŠ” 30ì„ ë§ì¶°ì¤Œ
 select empno, ename, sal, deptno
 from emp
 where deptno in(20,30) and sal>2000;
 
---4. ±Ş¿©°¡ 2000ÀÌ»ó 3000ÀÌÇÏÀÇ ¹üÀ§ ÀÌÇÏÀÇ °ª °¡Áø »ç¿ø µ¥ÀÌÅÍ ¸ğµÎ Ãâ·Â
+--4. ê¸‰ì—¬ê°€ 2000ì´ìƒ 3000ì´í•˜ì˜ ë²”ìœ„ ì´í•˜ì˜ ê°’ ê°€ì§„ ì‚¬ì› ë°ì´í„° ëª¨ë‘ ì¶œë ¥
 select *
 from emp
 where not sal between 2000 and 3000;
---¶Ç´Â
+--ë˜ëŠ”
 select *
 from emp
 where sal < 2000 or sal >3000;
 
---5. »ç¿ø ÀÌ¸§¿¡ E°¡ Æ÷ÇÔµÇ¾î ÀÖ´Â 30¹ø ºÎ¼­ »ç¿ø Áß ±Ş¿©°¡ 1000~2000 »çÀÌ°¡
---¾Æ´Ñ »ç¿øÀÇ ¹øÈ£, ÀÌ¸§, ±Ş¿©, ºÎ¼­¹øÈ£¸¦ Ãâ·ÂÇÏ¼¼¿ä
+--5. ì‚¬ì› ì´ë¦„ì— Eê°€ í¬í•¨ë˜ì–´ ìˆëŠ” 30ë²ˆ ë¶€ì„œ ì‚¬ì› ì¤‘ ê¸‰ì—¬ê°€ 1000~2000 ì‚¬ì´ê°€
+--ì•„ë‹Œ ì‚¬ì›ì˜ ë²ˆí˜¸, ì´ë¦„, ê¸‰ì—¬, ë¶€ì„œë²ˆí˜¸ë¥¼ ì¶œë ¥í•˜ì„¸ìš”
 select empno, ename, sal, deptno
 from emp
 where ename like '%E%' 
 AND deptno = 30
 and sal not between 1000 and 2000; 
 
---6. Ä¿¹Ì¼ÇÀÌ Á¸ÀçÇÏÁö ¾Ê°í, »ó±ŞÀÚ°¡ ÀÖ°í,
---Á÷Ã¥ÀÌ 'MANAGER', 'CLERK'ÀÎ 
---»ç¿øÀÇ Á¤º¸ ¸ğµÎ Ãâ·Â
+--6. ì»¤ë¯¸ì…˜ì´ ì¡´ì¬í•˜ì§€ ì•Šê³ , ìƒê¸‰ìê°€ ìˆê³ ,
+--ì§ì±…ì´ 'MANAGER', 'CLERK'ì¸ 
+--ì‚¬ì›ì˜ ì •ë³´ ëª¨ë‘ ì¶œë ¥
 select*
 from emp
 where comm is null
 and mgr is not null
 and job in ('MANAGER','CLERK');
+
+select 'DataBase', LOWER('DataBase') from dual;
+--í…Œì´ë¸” ì•ˆì— ì›ë³¸ë°ì´í„°ëŠ” ë³€ê²½ë˜ì§€ ì•ŠëŠ”ë‹¤.
+--ì‚¬ì›í…Œì´ë¸”ì—ì„œ ë¶€ì„œë²ˆí˜¸ê°€ 10ë²ˆì¸ ì‚¬ì›ëª…ì„ ëª¨ë‘ ì†Œë¬¸ìë¡œ ë³€í™˜
+select ename, LOWER(ename)
+from emp
+where deptno = 10;
+--ëŒ€ë¬¸ìë¡œ ë³€í™˜
+select 'DataBase', UPPER('DataBase') from dual;
+
+--ì§ê¸‰ì´ 'manager'ì¸ ì‚¬ì›ì„ ê²€ìƒ‰
+select ename, job from emp where UPPER(job) = UPPER('manager');
+
+select INITCAP('DATA BASE PROGRAM') from dual;
+
+--ì´ë¦„ì´ 'Smith'ì¸ ì‚¬ëŒì˜ ì •ë³´ ì¶œë ¥ 
+select * from emp where INITCAP(ename) = 'Smith';
+select * from emp where ename = UPPER('Smith');
+
+--ì´ë¦„ì— aê°€ ìˆëŠ” ì‚¬ì›ì˜ ì •ë³´ ì¶œë ¥
+select * from emp where upper(ename) like upper('%a%');
+select concat('Data', 'Base') from dual;--mySQLì—ì„œ ë§ì´ ì“´ë‹¤.
+select 'Data'||'Base' from dual; 
+-- ||ëŠ” ë¬¸ìì—´ ë‘ ê°œë¥¼ ë”í•´ì¤€ë‹¤.ì´ê±¸ ë§ì´ ì“´ë‹¤. 
+select ename||'ì˜ ì‚¬ì›ë²ˆí˜¸ëŠ” '|| empno||'ì…ë‹ˆë‹¤.' from emp;
+
+select length('data'), length('ë°ì´í„°') from dual;
+select 'DataBase', substr('DataBase',1,4), substr('DataBase',5),--ì§€ì •ì•ˆí•˜ë©´ ëê¹Œì§€ì˜ë¼ì˜´
+substr('DataBase',-1,1),substr('DataBase',-4,4) from dual;
+
+select ename, hiredate, substr(hiredate,1,2) year from emp where substr(hiredate,1,2) = 81;
+-- ì´ë¦„ì´ kë¡œ ëë‚˜ëŠ” ì§ì›ì˜ ì •ë³´ ì¶œë ¥(likeì“°ì§€ ë§ê³  substrì‚¬ìš©)
+select * from emp where substr(ename,-1,1) = UPPER('k');
+select instr('DataBase','D') from dual; --1
+select instr('DataBase','a') from dual; --2
+select instr('DataBase','a',3) from dual; --4 (3ë²ˆ ì¸ë±ìŠ¤ë¶€í„° ì°¾ì•„ì£¼ì„¸ìš”)
+select instr('DataBase','z') from dual; -- 0. í•´ë‹¹ê¸€ì ì—†ìŒ.
+
+--ì´ë¦„ì˜ ë‘ ë²ˆì§¸ ìë¦¬ì— 'A'ê°€ ìˆëŠ” ì‚¬ì›ì˜ ì´ë¦„ ì¶œë ¥(instr)
+select ename from emp where instr(ename,'A',2) = 2;
+
+select '010-1111-2222', replace('010-1111-2222','-',' ') 
+, replace('010-1111-2222','-')
+from dual;
